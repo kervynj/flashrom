@@ -9743,6 +9743,48 @@ const struct flashchip flashchips[] = {
 	},
 
 	{
+		.vendor		= "Micron/Numonyx/ST",
+		.name		= "N25Q256..3E", /* ..3E = 3V, uniform 64KB/4KB blocks/sectors */
+		.bustype	= BUS_SPI,
+		.manufacture_id = ST_ID,
+		.model_id	= ST_N25Q256__3E,
+		.total_size	= 32768,
+		.page_size	= 256,
+		/* supports SFDP */
+		/* OTP: 64B total; read 0x4B, write 0x42 */
+		.feature_bits	= FEATURE_WRSR_WREN | FEATURE_OTP | FEATURE_QPI
+		| FEATURE_4BA_SUPPORT,
+		 .four_bytes_addr_funcs =
+		 {
+			  .enter_4ba = spi_enter_4ba_b7_we, /* enter 4-bytes addressing mode by CMD B7 + WREN */
+			  .read_nbyte = spi_nbyte_read_4ba_direct, /* read directly from any mode, no need to enter 4ba */
+			  .program_byte = spi_byte_program_4ba, /* write from 4-bytes addressing mode */
+			  .program_nbyte = spi_nbyte_program_4ba /* write from 4-bytes addressing mode */
+		 },
+		.tested		= TEST_OK_PREW,
+		.probe		= probe_spi_rdid,
+		.probe_timing	= TIMING_ZERO,
+		.block_erasers	=
+		{
+			{
+				.eraseblocks = { {4 * 1024, 8192 } },
+				.block_erase = spi_block_erase_20_4ba,
+			}, {
+				.eraseblocks = { {64 * 1024, 512} },
+				.block_erase = spi_block_erase_d8_4ba,
+			}, {
+				.eraseblocks = { {32 * 1024 * 1024, 1} },
+				.block_erase = spi_block_erase_c7,
+			}
+		},
+		.printlock	= spi_prettyprint_status_register_n25q, /* TODO: config, lock, flag regs */
+		.unlock		= spi_disable_blockprotect_n25q, /* TODO: per 64kB sector lock registers */
+		.write		= spi_chip_write_256, /* Multi I/O supported */
+		.read		= spi_chip_read, /* Fast read (0x0B) and multi I/O supported */
+		.voltage	= {2700, 3600},
+	},
+
+	{
 		.vendor		= "MoselVitelic",
 		.name		= "V29C51000B",
 		.bustype	= BUS_PARALLEL,
