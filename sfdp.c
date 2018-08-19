@@ -263,7 +263,7 @@ static int sfdp_fill_flash(struct flashchip *chip, uint8_t *buf, uint16_t len, i
 		msg_cdbg2("non-volatile and the standard does not allow "
 			  "vendors to tell us whether EWSR/WREN is needed for "
 			  "status register writes - assuming EWSR.\n");
-			chip->feature_bits |= FEATURE_WRSR_EWSR;
+			chip->feature_bits |= FEATURE_WRSR_WREN;
 		}
 
 	msg_cdbg2("  Write chunk size is ");

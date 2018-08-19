@@ -9785,7 +9785,7 @@ const struct flashchip flashchips[] = {
 	},
 	
 		{
-		.vendor		= "SPANSION",
+		.vendor		= "Spansion",
 		.name		= "S25FL512", 
 		.bustype	= BUS_SPI,
 		.manufacture_id = SPANSION_ID,
@@ -9820,7 +9820,7 @@ const struct flashchip flashchips[] = {
 			}
 		},
 		.printlock	= spi_prettyprint_status_register_n25q, /* TODO: config, lock, flag regs */
-		.unlock		= spi_disable_blockprotect_n25q, /* TODO: per 64kB sector lock registers */
+		.unlock		= spi_disable_blockprotect_SF512, /* TODO: per 64kB sector lock registers */
 		.write		= spi_chip_write_256, /* Multi I/O supported */
 		.read		= spi_chip_read, /* Fast read (0x0B) and multi I/O supported */
 		.voltage	= {1800, 2100},

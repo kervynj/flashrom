@@ -645,6 +645,11 @@ int spi_disable_blockprotect_n25q(struct flashctx *flash)
 	return spi_disable_blockprotect_generic(flash, 0x5C, 1 << 7, 0, 0xFF);
 }
 
+int spi_disable_blockprotect_SF512(struct flashctx *flash)
+{
+    return spi_disable_blockprotect_generic(flash, 0x1C, 1 << 7, 0, 0xFF);
+}
+
 int spi_prettyprint_status_register_n25q(struct flashctx *flash)
 {
 	uint8_t status = spi_read_status_register(flash);
