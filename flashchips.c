@@ -9783,6 +9783,50 @@ const struct flashchip flashchips[] = {
 		.read		= spi_chip_read, /* Fast read (0x0B) and multi I/O supported */
 		.voltage	= {2700, 3600},
 	},
+	
+		{
+		.vendor		= "SPANSION",
+		.name		= "S25FL512", 
+		.bustype	= BUS_SPI,
+		.manufacture_id = SPANSION_ID,
+		.model_id	= SPANSION_S25FL512,
+		.total_size	= 65536,
+		.page_size	= 512,
+		/* supports SFDP */
+		/* OTP: 64B total; read 0x4B, write 0x42 */
+		.feature_bits	= FEATURE_WRSR_WREN | FEATURE_OTP | FEATURE_QPI
+		| FEATURE_4BA_SUPPORT,
+		 .four_bytes_addr_funcs =
+		 {
+			  .enter_4ba = spi_enter_4ba_b7_we, /* enter 4-bytes addressing mode by CMD B7 + WREN */
+			  .read_nbyte = spi_nbyte_read_4ba_direct, /* read directly from any mode, no need to enter 4ba */
+			  .program_byte = spi_byte_program_4ba, /* write from 4-bytes addressing mode */
+			  .program_nbyte = spi_nbyte_program_4ba /* write from 4-bytes addressing mode */
+		 },
+		.tested		= TEST_OK_PREW,
+		.probe		= probe_spi_rdid,
+		.probe_timing	= TIMING_ZERO,
+		.block_erasers	=
+		{
+			{
+				.eraseblocks = { {4 * 1024, 16384 } },
+				.block_erase = spi_block_erase_20_4ba,
+			}, {
+				.eraseblocks = { {64 * 1024, 1024} },
+				.block_erase = spi_block_erase_d8_4ba,
+			}, {
+				.eraseblocks = { {64 * 1024 * 1024, 1} },
+				.block_erase = spi_block_erase_c7,
+			}
+		},
+		.printlock	= spi_prettyprint_status_register_n25q, /* TODO: config, lock, flag regs */
+		.unlock		= spi_disable_blockprotect_n25q, /* TODO: per 64kB sector lock registers */
+		.write		= spi_chip_write_256, /* Multi I/O supported */
+		.read		= spi_chip_read, /* Fast read (0x0B) and multi I/O supported */
+		.voltage	= {1800, 2100},
+	},
+	
+	
 
 	{
 		.vendor		= "MoselVitelic",
