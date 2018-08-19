@@ -39,6 +39,7 @@ EXPORTDIR ?= .
 RANLIB  ?= ranlib
 PKG_CONFIG ?= pkg-config
 BUILD_DETAILS_FILE ?= build_details.txt
+LSFLAGS = -lz
 
 # The following parameter changes the default programmer that will be used if there is no -p/--programmer
 # argument given when running flashrom. The predefined setting does not enable any default so that every
@@ -62,9 +63,9 @@ CONFIG_DEFAULT_PROGRAMMER_ARGS ?= ''
 # You shouldn't have to change this flag.
 WARNERROR ?= yes
 
-ifeq ($(WARNERROR), yes)
-CFLAGS += -Werror
-endif
+#ifeq ($(WARNERROR), yes)
+#CFLAGS += -Werror
+#endif
 
 ifdef LIBS_BASE
 PKG_CONFIG_LIBDIR ?= $(LIBS_BASE)/lib/pkgconfig
