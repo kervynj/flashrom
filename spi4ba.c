@@ -155,7 +155,7 @@ int spi_nbyte_program_4ba(struct flashctx *flash, unsigned int addr,
 		msg_cerr("%s called for zero-length write\n", __func__);
 		return 1;
 	}
-	if (len > 256) {
+	if (len > 512) {
 		msg_cerr("%s called for too long a write\n", __func__);
 		return 1;
 	}
