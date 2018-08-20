@@ -9767,11 +9767,11 @@ const struct flashchip flashchips[] = {
 		.block_erasers	=
 		{
 			{
+                .eraseblocks = { {64 * 1024, 512} },
+				.block_erase = spi_block_erase_d8_4ba,
+			}, {
 				.eraseblocks = { {4 * 1024, 8192 } },
 				.block_erase = spi_block_erase_20_4ba,
-			}, {
-				.eraseblocks = { {64 * 1024, 512} },
-				.block_erase = spi_block_erase_d8_4ba,
 			}, {
 				.eraseblocks = { {32 * 1024 * 1024, 1} },
 				.block_erase = spi_block_erase_c7,
@@ -9800,8 +9800,8 @@ const struct flashchip flashchips[] = {
 		 {
 			  .enter_4ba = spi_enter_4ba_b7_we, /* enter 4-bytes addressing mode by CMD B7 + WREN */
 			  .read_nbyte = spi_nbyte_read_4ba_direct, /* read directly from any mode, no need to enter 4ba */
-			  .program_byte = spi_byte_program_4ba, /* write from 4-bytes addressing mode */
-			  .program_nbyte = spi_nbyte_program_4ba /* write from 4-bytes addressing mode */
+			  .program_byte = spi_byte_program_4ba_ereg, /* write from 4-bytes addressing mode */
+			  .program_nbyte = spi_nbyte_program_4ba_ereg /* write from 4-bytes addressing mode */
 		 },
 		.tested		= TEST_OK_PREW,
 		.probe		= probe_spi_rdid,
