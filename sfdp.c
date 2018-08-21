@@ -383,7 +383,7 @@ static int sfdp_fill_flash(struct flashchip *chip, uint8_t *buf, uint16_t len, i
 	if(!sfdp_rev_15)
 		goto done;
 
-	if (len < 16 * 4) {
+	if (len < 32 * 4) {
 		msg_cdbg("%s: len of BFPT is out of spec\n", __func__);
 		msg_cerr("ERROR: Unable read 4-bytes addressing parameters.\n");
 		return 1;
