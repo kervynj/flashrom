@@ -9767,7 +9767,7 @@ const struct flashchip flashchips[] = {
 		.block_erasers	=
 		{
 			{
-                .eraseblocks = { {64 * 1024, 512} },
+                                .eraseblocks = { {64 * 1024, 512} },
 				.block_erase = spi_block_erase_d8_4ba,
 			}, {
 				.eraseblocks = { {4 * 1024, 8192 } },
@@ -9809,15 +9809,15 @@ const struct flashchip flashchips[] = {
 		.block_erasers	=
 		{
 			{
+                        	.eraseblocks = { {64 * 1024 * 1024, 1} },
+				.block_erase = spi_block_erase_c7,
+			}, {	 
 				.eraseblocks = { {4 * 1024, 16384 } },
 				.block_erase = spi_block_erase_20_4ba,
 			}, {
 				.eraseblocks = { {64 * 1024, 1024} },
 				.block_erase = spi_block_erase_d8_4ba,
-			}, {
-				.eraseblocks = { {64 * 1024 * 1024, 1} },
-				.block_erase = spi_block_erase_c7,
-			}
+			} 
 		},
 		.printlock	= spi_prettyprint_status_register_n25q, /* TODO: config, lock, flag regs */
 		.unlock		= spi_disable_blockprotect_SF512, /* TODO: per 64kB sector lock registers */
