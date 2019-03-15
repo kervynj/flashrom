@@ -470,6 +470,7 @@
  * second byte of device ID is log(bitsize)-9.
  * Generalplus SPI chips seem to be compatible with Macronix
  * and use the same set of IDs. */
+#define MACRONIX_MX25L_22	0x2210 /* I'm not sure : ( */
 #define MACRONIX_MX25L512	0x2010	/* Same as MX25L512E, MX25V512, MX25V512C */
 #define MACRONIX_MX25L1005	0x2011	/* Same as MX25L1005C, MX25L1006E */
 #define MACRONIX_MX25L2005	0x2012	/* Same as MX25L2005C, MX25L2006E */
